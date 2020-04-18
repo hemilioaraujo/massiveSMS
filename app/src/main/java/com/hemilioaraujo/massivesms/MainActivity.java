@@ -49,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
         try {
             SmsManager sms = SmsManager.getDefault();
             sms.sendTextMessage(number,null,message,null,null);
-            Toast.makeText(getApplicationContext(), "Mensaje Enviado.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "SMS Sent!.", Toast.LENGTH_LONG).show();
         }
         catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Mensaje no enviado, datos incorrectos.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "SMS not sent, incorrect data.", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
     }
