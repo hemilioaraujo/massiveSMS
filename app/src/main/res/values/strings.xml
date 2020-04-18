@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">massiveSMS</string>
+    <string name="labelMSG">Message:</string>
+    <string name="labelNumber">Number:</string>
+    <string name="placeholderNumber">Number</string>
+    <string name="labelSendButton">Send</string>
 </resources>
