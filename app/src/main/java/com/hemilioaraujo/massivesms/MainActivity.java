@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(ActivityCompat.checkSelfPermission(
                 MainActivity.this, Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED&& ActivityCompat.checkSelfPermission(
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 MainActivity.this,Manifest
                         .permission.SEND_SMS)!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(MainActivity.this,new String[]
@@ -56,4 +56,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
 }
