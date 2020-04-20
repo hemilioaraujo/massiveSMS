@@ -34,23 +34,15 @@ public class MainActivity extends AppCompatActivity {
         search = findViewById(R.id.btnSearch);
 
         //        CONFIRMA PERMISSÃO PARA ENVIAR SMS
-        if(ActivityCompat.checkSelfPermission(
-                MainActivity.this, Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                MainActivity.this,Manifest
-                        .permission.SEND_SMS)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(MainActivity.this,new String[]
-                    { Manifest.permission.SEND_SMS,},1000);
+        if(ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MainActivity.this,new String[]{ Manifest.permission.SEND_SMS,},1000);
         }else{
 
         };
 
         //        CONFIRMA PERMISSÃO PARA ACESSAR CONTATOS
-        if (ActivityCompat.checkSelfPermission(
-                MainActivity.this, Manifest.permission.READ_CONTACTS)
-                != PackageManager.PERMISSION_GRANTED){
-            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS},
-                    1);
+        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MainActivity.this,new String[]{ Manifest.permission.READ_CONTACTS,},1000);
         } else {
 
         }
