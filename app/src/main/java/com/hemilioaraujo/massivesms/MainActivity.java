@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     Button send, search;
-    EditText number, message;
+    EditText number, message, name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
         send = (Button)findViewById(R.id.btnSend);
         number = findViewById(R.id.txtNumber);
+        name = findViewById(R.id.txtName);
         message = findViewById(R.id.txtMessage);
         search = findViewById(R.id.btnSearch);
+
+//        https://www.youtube.com/watch?v=SV-J9JWLEDA
+//        vídeo explicação para resolver permissões
 
         //        CONFIRMA PERMISSÃO PARA ENVIAR SMS
         if(ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
@@ -76,14 +80,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             Uri contactData = data.getData();
             Cursor c = getContentResolver().query(contactData, null, null, null, null);
+
             if (c.moveToFirst()) {
 
                 String phoneNumber = "", emailAddress = "";
-                String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                String contactName = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
                 String contactId = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
                 //http://stackoverflow.com/questions/866769/how-to-call-android-contacts-list   our upvoted answer
 
@@ -102,17 +106,10 @@ public class MainActivity extends AppCompatActivity {
                     phones.close();
                 }
 
-                // Find Email Addresses
-                Cursor emails = getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + contactId, null, null);
-                while (emails.moveToNext()) {
-                    emailAddress = emails.getString(emails.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
-                }
-                emails.close();
-
                 //mainActivity.onBackPressed();
                 // Toast.makeText(mainactivity, "go go go", Toast.LENGTH_SHORT).show();
 
-//                tvname.setText("Name: " + name);
+                name.setText(contactName);
                 number.setText(phoneNumber);
 //                tvmail.setText("Email: " + emailAddress);
 //                Log.d("curs", name + " num" + phoneNumber + " " + "mail" + emailAddress);

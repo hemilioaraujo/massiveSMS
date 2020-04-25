@@ -2,7 +2,13 @@
     <string name="app_name">massiveSMS</string>
     <string name="labelMSG">Message:</string>
     <string name="labelNumber">Number:</string>
-    <string name="placeholderNumber">Number</string>
+    <string name="labelName">Name:</string>
+    <string name="labelServico">Serviço:</string>
     <string name="labelSendButton">Send</string>
+    <string name="hintName">Client name</string>
+    <string name="hintNumber">Client number</string>
+    <string name="switchPe">Pé</string>
+    <string name="switchMao">Mão</string>
+    <string name="switchAlongamento">Alongamento</string>
     <string name="labelSearchButton">🔍</string>
 </resources>
