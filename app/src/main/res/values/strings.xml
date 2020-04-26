@@ -10,5 +10,10 @@
     <string name="switchPe">Pé</string>
     <string name="switchMao">Mão</string>
     <string name="switchAlongamento">Alongamento</string>
+    <string name="labelData">Data</string>
+    <string name="labelHora">Hora</string>
+
     <string name="labelSearchButton">🔍</string>
+    <string name="labelCalendarButton">📅</string>
+    <string name="labelTimeButton">⏲</string>
 </resources>

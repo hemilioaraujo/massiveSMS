@@ -6,6 +6,8 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -13,15 +15,22 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.telephony.SmsManager;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 
 public class MainActivity extends AppCompatActivity {
-    Button send, search;
+    Button send, search, dateButton, timeButton;
     EditText number, message, name;
+    TextView txtDate, txtTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +38,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         send = (Button)findViewById(R.id.btnSend);
+        dateButton = (Button) findViewById(R.id.btnDate);
+        timeButton = (Button) findViewById(R.id.btnTime);
+
         number = findViewById(R.id.txtNumber);
         name = findViewById(R.id.txtName);
         message = findViewById(R.id.txtMessage);
         search = findViewById(R.id.btnSearch);
+        txtDate = findViewById(R.id.lblDate);
+        txtTime = findViewById(R.id.lblTime);
+
+
 
 //        https://www.youtube.com/watch?v=SV-J9JWLEDA
 //        vídeo explicação para resolver permissões
@@ -62,6 +78,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
                 startActivityForResult(intent, 1);
+            }
+        });
+
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleDateButton();
+            }
+        });
+
+        timeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleTimeButton();
             }
         });
     }
@@ -116,5 +146,51 @@ public class MainActivity extends AppCompatActivity {
             }
             c.close();
         }
+    }
+
+//    DATE PICKER
+    private void handleDateButton() {
+        final Calendar calendar = Calendar.getInstance();
+        int YEAR = calendar.get(Calendar.YEAR);
+        int MONTH = calendar.get(Calendar.MONTH);
+        int DATE = calendar.get(Calendar.DATE);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.set(Calendar.YEAR, year);
+                calendar1.set(Calendar.MONTH, month);
+                calendar1.set(Calendar.DATE, date);
+                String dateText = DateFormat.format("EEEE, d-MMMM-yyyy", calendar1).toString();
+                txtDate.setText(dateText);
+            }
+        }, YEAR, MONTH, DATE);
+
+        datePickerDialog.show();
+    }
+
+//    TIME PICKER
+    private void handleTimeButton() {
+        Calendar calendar = Calendar.getInstance();
+        int HOUR = calendar.get(Calendar.HOUR);
+        int MINUTE = calendar.get(Calendar.MINUTE);
+        boolean is24HourFormat = DateFormat.is24HourFormat(this);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+//                Log.i(TAG, "onTimeSet: " + hour + minute);minute
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.set(Calendar.HOUR, hour);
+                calendar1.set(Calendar.MINUTE, minute);
+                String dateText = hour + ":" + minute;
+//                String dateText = DateFormat.format("hh:mm", calendar1).toString();
+                txtTime.setText(dateText);
+            }
+        }, HOUR, MINUTE, is24HourFormat);
+
+        timePickerDialog.show();
     }
 }
