@@ -15,5 +15,5 @@
 
     <string name="labelSearchButton">🔍</string>
     <string name="labelCalendarButton">📅</string>
-    <string name="labelTimeButton">⏲</string>
+    <string name="labelTimeButton">🕐</string>
 </resources>

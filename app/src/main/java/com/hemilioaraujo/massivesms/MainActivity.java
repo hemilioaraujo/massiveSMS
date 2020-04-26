@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                 calendar1.set(Calendar.YEAR, year);
                 calendar1.set(Calendar.MONTH, month);
                 calendar1.set(Calendar.DATE, date);
-                String dateText = DateFormat.format("EEEE, d-MMMM-yyyy", calendar1).toString();
+                String dateText = DateFormat.format("EEEE, dd/MM/yyyy", calendar1).toString();
                 txtDate.setText(dateText);
             }
         }, YEAR, MONTH, DATE);
